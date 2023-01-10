@@ -46,7 +46,7 @@ if (isset($_POST['query'])) {
     }
   } else {
     echo '<script>
-    $(".boxes").show();
+    $(".boxes").hide();
     </script>';
     echo '<p class="list-group-item border-1">No Record</p>';
   }
