@@ -24,49 +24,19 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
 <!-- Content -->
 <section class="content">
   <!-- modal that contains add form -->
-  <div class="modale">
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <div class="modal-header">
-          <span class="close">&times;</span>
-          <h2>Modal Header</h2>
-        </div>
-        <div class="modal-body">
-          <form action="index.php" method="post">
-            <label for="name">Nom de Composant</label>
-            <input type="text" id="name" name="name" placeholder="Entrer le nom du composant, ex:souris .." />
-
-            <label for="qte">Quantite</label>
-            <input type="text" id="qte" name="qte" placeholder="Specifier la quantite du composant, ex 18 .." />
-
-
-            <label for="etat">Etat</label>
-            <select id="etat" name="etat">
-              <option value="disponible">Disponible</option>
-              <option value="en-pane">En pane</option>
-              <option value="perdu">Perdu</option>
-            </select>
-            <label for="qte">Date d'Achat</label>
-            <input type="date" id="date" name="date" />
-            <input type="submit" value="Ajouter" />
-          </form>
-        </div>
-        <div class="modal-footer">
-          <h3>Modal Footer</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
   <!-- search -->
   <div class="container">
-    <br />
-    <form method="post" action="export.php" style="text-align:center;">
-      <input type="submit" name="export" class="export" style="width: 100%;" value="Export" />
-    </form>
+    <h2>Date filter</h2>
+
+    <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
+    <div class="custom-select" style="width:200px;">
+      <select name="filter1" id="filter1">
+        <option value="" disabled>Choisir votre etat</option>
+        <option value="disponible">Disponible</option>
+        <option value="en-pane">En pane</option>
+        <option value="perdu">Perdu</option>
+      </select>
+    </div>
   </div>
   <div class="container">
     <?php
@@ -111,5 +81,27 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
 <?php
 include "footer.php";
 ?>
+
+<!-- <script>
+  $(document).ready(function() {
+    $("#filter").on("change", function() {
+      var value = $(this).val();
+      alert(value);
+
+      $.ajax({
+        url: "fetch_filter.php",
+        type: "POST",
+        data: "req=" + value,
+        beforeSend: function() {
+          $(".conatainer").html("<span>Fetching ...</span>");
+        },
+        success: function(data) {
+          $(".conatainer").html(data);
+        }
+      })
+    })
+  })
+</script> -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="script.js"></script>
