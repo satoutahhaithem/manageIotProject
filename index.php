@@ -2,17 +2,31 @@
 include "config/db_connection.php";
 include "header.php";
 $message = "";
-if (isset($_POST["name"]) && isset($_POST["qte"]) && isset($_POST["etat"]) && isset($_POST["date"])) {
+if (isset($_POST["name"]) && isset($_POST["qte"]) && isset($_POST["etat"]) && isset($_POST["date"]) && isset($_POST['upload'])) {
   $nom = $_POST["name"];
   $qte = $_POST["qte"];
   $etat = $_POST["etat"];
   $datee = $_POST["date"];
-  $sql_add = "INSERT INTO iot.composant(nom,quantite,etat,date_achat) VALUES(:nom,:qte,:etat,:datee)";
+  $filename = $_FILES["uploadfile"]["name"];
+  $tempname = $_FILES["uploadfile"]["tmp_name"];
+  $folder = "./image/" . $filename;
+  $sql_add = "INSERT INTO iot.composant(nom,image,quantite,etat,date_achat) VALUES(:nom,:filename,:qte,:etat,:datee)";
   $statement_add = $connection->prepare($sql_add);
-  if ($statement_add->execute([':nom' => $nom, ':qte' => $qte, ':etat' => $etat, ':datee' => $datee])) {
+
+  if ($statement_add->execute([':nom' => $nom, ':filename' => $filename, ':qte' => $qte, ':etat' => $etat, ':datee' => $datee])) {
     $message = "data inserted successfuly";
-  };
+    echo $message;
+  } else {
+    echo "data doesnt inserted";
+  }
+
+  // if (move_uploaded_file($tempname, $folder)) {
+  //   echo "<h3> Image uploaded successfully!</h3>";
+  // } else {
+  //   echo "<h3> Failed to upload image!</h3>";
+  // }
 }
+
 
 // Get all composants
 $sql_get_all = "SELECT * FROM iot.composant";
@@ -34,7 +48,7 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
           <h2>Modal Header</h2>
         </div>
         <div class="modal-body">
-          <form action="index.php" method="post">
+          <form action="index.php" method="post" enctype="multipart/form-data">
             <label for="name">Nom de Composant</label>
             <input type="text" id="name" name="name" placeholder="Entrer le nom du composant, ex:souris .." />
 
@@ -43,6 +57,14 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
 
 
             <label for="etat">Etat</label>
+            <!-- Upload Image -->
+            <div class="form-group">
+              <input class="form-control" type="file" name="uploadfile" value="" />
+            </div>
+            <!-- <div class="form-group">
+              <button class="btn btn-primary" type="submit" name="upload">UPLOAD</button>
+            </div> -->
+            <!-- Upload Image -->
             <select id="etat" name="etat">
               <option value="disponible">Disponible</option>
               <option value="en-pane">En pane</option>
@@ -50,7 +72,7 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
             </select>
             <label for="qte">Date d'Achat</label>
             <input type="date" id="date" name="date" />
-            <input type="submit" value="Ajouter" />
+            <input type="submit" value="Ajouter" name="upload" />
           </form>
         </div>
         <div class="modal-footer">
@@ -74,13 +96,15 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
       include "alert_success.php";
     }
     ?>
+
+
   </div>
   <!-- affichage du composants dans la page -->
   <div class="container boxes">
     <?php foreach ($composants as $composant) : ?>
       <div class="box">
         <div class="image">
-          <img src="images/souris.jpg" alt="" />
+          <img src="./image/<?php echo $composant->image; ?>">
         </div>
         <div class="imformation">
           <div class="nom">
