@@ -2,30 +2,29 @@
 include "config/db_connection.php";
 include "header.php";
 $message = "";
-if (isset($_POST["name"]) && isset($_POST["qte"]) && isset($_POST["etat"]) && isset($_POST["date"]) && isset($_POST['upload'])) {
+if (isset($_POST['upload'])) {
   $nom = $_POST["name"];
   $qte = $_POST["qte"];
   $etat = $_POST["etat"];
   $datee = $_POST["date"];
   $filename = $_FILES["uploadfile"]["name"];
   $tempname = $_FILES["uploadfile"]["tmp_name"];
-  $folder = "./image/" . $filename;
+
+  $folder = "image/" . $filename;
+
   $sql_add = "INSERT INTO iot.composant(nom,image,quantite,etat,date_achat) VALUES(:nom,:filename,:qte,:etat,:datee)";
   $statement_add = $connection->prepare($sql_add);
 
   if ($statement_add->execute([':nom' => $nom, ':filename' => $filename, ':qte' => $qte, ':etat' => $etat, ':datee' => $datee])) {
-    $message = "data inserted successfuly";
-    echo $message;
+    if (move_uploaded_file($tempname,  $folder)) {
+      $message = "data inserted successfuly";
+      echo $message;
+    }
   } else {
     echo "data doesnt inserted";
   }
-
-  if (move_uploaded_file($tempname, $folder)) {
-    // echo "<h3> Image uploaded successfully!</h3>";
-  } else {
-    // echo "<h3> Failed to upload image!</h3>";
-  }
 }
+
 
 
 // Get all composants
@@ -59,7 +58,7 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
             <label for="etat">Etat</label>
             <!-- Upload Image -->
             <div class="form-group">
-              <input class="form-control" type="file" name="uploadfile" value="" />
+              <input type="file" name="uploadfile" />
             </div>
             <!-- <div class="form-group">
               <button class="btn btn-primary" type="submit" name="upload">UPLOAD</button>
