@@ -20,11 +20,11 @@ if (isset($_POST["name"]) && isset($_POST["qte"]) && isset($_POST["etat"]) && is
     echo "data doesnt inserted";
   }
 
-  // if (move_uploaded_file($tempname, $folder)) {
-  //   echo "<h3> Image uploaded successfully!</h3>";
-  // } else {
-  //   echo "<h3> Failed to upload image!</h3>";
-  // }
+  if (move_uploaded_file($tempname, $folder)) {
+    // echo "<h3> Image uploaded successfully!</h3>";
+  } else {
+    // echo "<h3> Failed to upload image!</h3>";
+  }
 }
 
 
