@@ -4,14 +4,14 @@ require_once 'config/db_connection.php';
 
 if (isset($_POST['query'])) {
   $inpText = $_POST['query'];
-  $sql = 'SELECT 	* FROM iot.composant WHERE date_achat LIKE :searchedate';
+  $sql = 'SELECT 	* FROM iot.composant WHERE nom LIKE :searchedName';
   $stmt = $connection->prepare($sql);
-  $stmt->execute(['searchedate' => '%' . $inpText . '%']);
+  $stmt->execute(['searchedName' => '%' . $inpText . '%']);
   $result = $stmt->fetchAll();
 
   if ($result) {
     echo '<script>
-    // $(".boxes").hide();
+    $(".boxes").hide();
     </script>';
     foreach ($result as $row) {
       echo "
@@ -46,7 +46,7 @@ if (isset($_POST['query'])) {
     }
   } else {
     echo '<script>
-    // $(".boxes").hide();
+    $(".boxes").hide();
     </script>';
     echo '<p class="list-group-item border-1">No Record</p>';
   }
