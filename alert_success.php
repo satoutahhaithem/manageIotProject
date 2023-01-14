@@ -19,7 +19,7 @@ for (i = 0; i < close.length; i++) {
     div.style.opacity = "0";
 
     // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
-    setTimeout(function(){ div.style.display = "none"; }, 600);
+    setTimeout(function(){ div.style.display = "none"; }, 200);
   }
 }
 </script>
