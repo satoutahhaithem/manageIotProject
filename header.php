@@ -32,7 +32,7 @@ session_start();
           <li><a href="filter_date.php" id="myBtn">Filter par date</a></li>
           <li><a href="filter_etat.php" id="myBtn2">Filter par etat</a></li>
           <li><a href="index.php">Composants</a></li>
-          <li><a href="#">Compte</a></li>
+          <li><a href="decharge.php">Decharge</a></li>
           <li><button onclick="logout()">Logout</button></li>
         </ul>
       </div>

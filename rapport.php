@@ -1,15 +1,33 @@
-<div>
-    <p id="exportContent">
-        dfhgdfjgdjhj
-        <?php
-        session_start();
-        $_SESSION['firstName'];
-        echo $_SESSION['firstName'] . ' ' . $_SESSION['lastName'] . ' ' . $_SESSION['promo'] . ' ' . $_SESSION['adress']
-            . ' ' . $_SESSION['email'] . ' ' . $_SESSION['phone'] . ' ' . $_SESSION['whyWantProduct'] . ' ' . $_SESSION['composant'];
-        ?>
-    </p>
-    <button onclick="Export2Word('exportContent');" id="btnAfficher">Export as .doc</button>
+<?php
+include "style.php";
+session_start();
+?>
+<div class="let" id="exportContent">
+    <div class="container">
+        <div class="lettre">
+            <h3>Ticket de decharge</h3>
+            <div class="flex-message">
+                <div class=".contact-left">
+                    <h4>Nom : <?php echo $_SESSION['lastName'] ?></h4>
+                    <h4>Prenom : <?php echo $_SESSION['firstName'] ?></h4>
+                    <h4>Telephone : <?php echo $_SESSION['phone'] ?></h4>
+                </div>
+                <div class=".contact-right">
+                    <h4>Email : <?php echo $_SESSION['email'] ?></h4>
+                    <h4>Promo : <?php echo $_SESSION['promo'] ?></h4>
+                    <h4>Adresse : <?php echo $_SESSION['adress'] ?></h4>
+                </div>
+            </div>
+            <div class="message">
+                <p>
+                    Je soussigné(e) nom et prenom que je vais emprunter le composant :
+                    "<?php echo $_SESSION['composant'] ?>" a pour but de <span> <?php echo $_SESSION['whyWantProduct'] ?>.</span>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
+<button onclick="Export2Word('exportContent');" id="btnAfficher">Export as .doc</button>
 <script>
     $('#btn').on('click', function() {
         $('#exportContent').text('Hello, my name is ' + $('#firstName').val() + ' ' +

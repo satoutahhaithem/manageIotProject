@@ -661,3 +661,132 @@ input[type="submit"]:hover {
   background-position: 0 0;
   color: var(--text-color);
 }
+
+.update .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.update .container form {
+  display: flex;
+  background-color: rgb(239 237 237);
+  width: 36em;
+  border-radius: 8px;
+  flex-wrap: wrap;
+  /* gap: 10px; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  box-shadow: rgb(0 0 0 / 12%) 0px 4px 12px;
+  margin-bottom: 30px;
+}
+
+.update .container form input,
+.update .container form select {
+  width: 60%;
+  padding: 10px;
+  background-color: #ecf0f1ff;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.update .container form input:hover,
+.update .container form select:hover {
+  border: 1px solid var(--dark-purple);
+}
+
+.update .container form label {
+  padding: 0;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.imgg {
+  text-align: center;
+  padding: 3%;
+  border: thin solid black;
+  width: 60%;
+  border-radius: 8px;
+}
+
+.imgg input {
+  display: none;
+}
+.imgg label {
+  cursor: pointer;
+}
+#imageName {
+  color: green;
+}
+
+.update input[type="submit"] {
+  width: 50%;
+  display: block;
+  align-items: center;
+  border: 3px solid #1d6f42;
+  transition: all 0.5s ease;
+  background-color: transparent;
+  color: #1d6f42;
+  padding: 14px 20px;
+  margin: 8px auto;
+  outline: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.update input[type="submit"]:hover {
+  color: var(--cultured);
+  background-color: #1d6f42;
+  border-color: #1d6f42;
+}
+
+.decharge .container form {
+  width: 57em;
+}
+
+textarea {
+  width: 50%;
+  height: 30%;
+  background-color: #ecf0f1ff;
+  border-radius: 8px;
+}
+.let .container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.lettre {
+  background-color: var(--background-color);
+  box-shadow: rgb(0 0 0 / 29%) 0px 4px 12px;
+  width: 800px;
+  height: 600px;
+  text-align: center;
+}
+.lettre h3 {
+  font-family: "Courier New", Courier, monospace;
+  margin-top: 10px;
+}
+.flex-message {
+  font-family: "Courier New", Courier, monospace;
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: baseline;
+  gap: 30px;
+  margin-top: 4em;
+}
+
+.message {
+  font-family: "Courier New", Courier, monospace;
+  margin-top: 120px;
+  text-align: left;
+  margin-left: 30px;
+}

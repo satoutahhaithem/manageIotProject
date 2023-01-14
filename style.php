@@ -1,0 +1,1 @@
+<link href="style.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />

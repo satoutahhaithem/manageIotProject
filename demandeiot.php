@@ -1,7 +1,6 @@
 <?php
 include "config/db_connection.php";
 include "header.php";
-session_start();
 if (isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["promo"]) && isset($_POST["adress"]) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['whyWantProduct']) && isset($_POST['composant'])) {
     $firstName = $_POST["firstName"];
     $lastName = $_POST["lastName"];
@@ -122,10 +121,6 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
 </html>
 
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
-<!-- <script src="FileSaver.js"></script> -->
-<!-- <script src="jquery.wordexport.js"></script> -->
 
 <script>
     $('#btn').on('click', function() {
