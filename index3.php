@@ -3,28 +3,28 @@ include "config/db_connection.php";
 include "header.php";
 
 // Get all composants
+$sql_get_all = "SELECT * FROM iot.composant";
+$statement_get = $connection->prepare($sql_get_all);
+$statement_get->execute();
+$composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
+
 ?>
 <!-- Content -->
 <?php if ($_SESSION["email"]) { ?>
   <section class="content">
-    <script src="JS/next_prev.js"></script>
+    <!-- modal that contains add form -->
     <?php
     include "add.php";
 
     ?>
     <div class="export">
       <div class="container">
+        <br />
         <form method="post" action="export.php" style="text-align:center;">
           <input type="submit" name="export" class="export" style="width: 100%;" value="Export Excel" />
+          <input type="button" id="next" value="Next">
+          <input type="button" id="previous" value="Previous">
         </form>
-        <div class="result">
-          <p></p>
-        </div>
-        <div class="next-prev">
-          <input type="button" value="Next" id="next">
-          <input type="button" value="previous" id="previous">
-        </div>
-
       </div>
     </div>
     <div class="container">
@@ -41,16 +41,8 @@ include "header.php";
 
     </div>
     <!-- affichage du composants dans la page -->
-    <div class="container boxes" id="boxes">
-      <?php
-      $sql_get_all = "SELECT * FROM iot.composant LIMIT 6";
-      $statement_get = $connection->prepare($sql_get_all);
-      $statement_get->execute();
-      $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
-
-
-
-      foreach ($composants as $composant) : ?>
+    <div class="container boxes">
+      <?php foreach ($composants as $composant) : ?>
         <div class="box" id="box">
           <div class="image">
             <img src="./image/<?php echo $composant->image; ?>">

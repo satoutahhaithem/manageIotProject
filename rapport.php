@@ -1,8 +1,14 @@
 <div>
     <p id="exportContent">
-
+        dfhgdfjgdjhj
+        <?php
+        session_start();
+        $_SESSION['firstName'];
+        echo $_SESSION['firstName'] . ' ' . $_SESSION['lastName'] . ' ' . $_SESSION['promo'] . ' ' . $_SESSION['adress']
+            . ' ' . $_SESSION['email'] . ' ' . $_SESSION['phone'] . ' ' . $_SESSION['whyWantProduct'] . ' ' . $_SESSION['composant'];
+        ?>
     </p>
-    <button onclick="Export2Word('exportContent');" id="btnAfficher" style="display: none;">Export as .doc</button>
+    <button onclick="Export2Word('exportContent');" id="btnAfficher">Export as .doc</button>
 </div>
 <script>
     $('#btn').on('click', function() {

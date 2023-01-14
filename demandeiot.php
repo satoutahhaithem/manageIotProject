@@ -1,6 +1,7 @@
 <?php
 include "config/db_connection.php";
 include "header.php";
+session_start();
 if (isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["promo"]) && isset($_POST["adress"]) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['whyWantProduct']) && isset($_POST['composant'])) {
     $firstName = $_POST["firstName"];
     $lastName = $_POST["lastName"];
@@ -16,7 +17,15 @@ if (isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["pro
     echo "helo";
     if ($statement_add->execute([':firstName' => $firstName, ':lastName' => $lastName, ':promo' => $promo, ':adress' => $adress, ':email' => $email, ':phone' => $phone, ':whyWantProduct' => $whyWantProduct, ':composant' => $composant])) {
         $message = "data inserted successfuly";
-        echo $message;
+        $_SESSION['firstName'] = $firstName;
+        $_SESSION['lastName'] = $lastName;
+        $_SESSION['promo'] = $promo;
+        $_SESSION['adress'] = $adress;
+        $_SESSION['email'] = $email;
+        $_SESSION['phone'] = $phone;
+        $_SESSION['whyWantProduct'] = $whyWantProduct;
+        $_SESSION['composant'] = $composant;
+        header("Location:rapport.php");
     } else {
         echo "data doesn't inserted";
     }
@@ -39,6 +48,11 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
 </head>
 
 <body>
+    <script>
+        function goToRapport() {
+            window.location.href = 'rapport.php';
+        }
+    </script>
     <form method="post">
         <!-- 2 column grid layout with text inputs for the first and last names -->
         <div class="row mb-4">
@@ -90,9 +104,7 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
             <label class="form-label" for="whyWantProduct">why do you want this product </label>
         </div>
         <!-- Submit button -->
-        <a href="rapport.php">
-            <button type="submit">submit</button>
-        </a>
+        <button type="submit" onclick="goToRapport()">submit</button>
     </form>
     <div>
         <p id="exportContent">

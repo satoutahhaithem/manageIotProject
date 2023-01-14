@@ -66,11 +66,11 @@ if (isset($_POST['upload'])) {
             <div class="modal-body">
                 <form action="index.php" method="post" enctype="multipart/form-data" id="myform">
                     <label for="name">Nom de Composant</label>
-                    <input type="text" id="name" name="name" placeholder="Entrer le nom du composant, ex:souris .." />
+                    <input type="text" id="name" name="name" placeholder="Entrer le nom du composant, ex:souris .." required title="This field should not be left blank." />
                     <label id="email-error" class="errors" for="nom"><?php echo $errors['nom'] ?></label>
 
                     <label for="qte">Quantite</label>
-                    <input type="text" id="qte" name="qte" placeholder="Specifier la quantite du composant, ex 18 .." />
+                    <input type="text" id="qte" name="qte" placeholder="Specifier la quantite du composant, ex 18 .." required title="This field should not be left blank." />
                     <label id="email-error" class="errors" for="qte"><?php echo $errors['qte'] ?></label>
 
 
@@ -83,13 +83,13 @@ if (isset($_POST['upload'])) {
               <button class="btn btn-primary" type="submit" name="upload">UPLOAD</button>
             </div> -->
                     <!-- Upload Image -->
-                    <select id="etat" name="etat">
+                    <select id="etat" name="etat" required>
                         <option value="disponible">Disponible</option>
                         <option value="en-pane">En pane</option>
                         <option value="perdu">Perdu</option>
                     </select>
                     <label for="qte">Date d'Achat</label>
-                    <input type="date" id="date" name="date" />
+                    <input type="date" id="date" name="date" required />
                     <input type="submit" value="Ajouter" name="upload" class="addd" />
                 </form>
             </div>
