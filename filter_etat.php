@@ -22,67 +22,72 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
 
 ?>
 <!-- Content -->
-<section class="content">
-  <!-- modal that contains add form -->
-  <!-- search -->
-  <div class="container">
-    <h2>Date filter</h2>
-
-    <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
-    <div class="custom-select" style="width:200px;">
-      <select name="filter1" id="filter1">
-        <option value="" disabled>Choisir votre etat</option>
-        <option value="disponible">Disponible</option>
-        <option value="en-pane">En pane</option>
-        <option value="perdu">Perdu</option>
-      </select>
-    </div>
-  </div>
-  <div class="container">
+<?php if ($_SESSION["email"]) { ?>
+  <section class="content">
     <?php
-    if (!empty($message)) {
-      include "alert_success.php";
-    }
+    include "add.php";
+
     ?>
-  </div>
-  <!-- affichage du composants dans la page -->
-  <div class="container boxes">
-    <?php foreach ($composants as $composant) : ?>
-      <div class="box">
-        <div class="image">
-          <img src="images/souris.jpg" alt="" />
-        </div>
-        <div class="imformation">
-          <div class="nom">
-            <h3>Nom</h3>
-            <p><?= $composant->nom; ?></p>
-          </div>
-          <div class="quantite">
-            <h3>Quantite</h3>
-            <p><?= $composant->quantite; ?></p>
-          </div>
-          <div class="etat">
-            <h3>Etat</h3>
-            <p><?= $composant->etat; ?></p>
-          </div>
-          <div class="date">
-            <h3>Date d'achat</h3>
-            <p><?= $composant->date_achat; ?></p>
-          </div>
-          <div class="buttons">
-            <a class="supprimer" onclick="return confirm('Voulez vous vraiment supprimer ce composant ?')" href="delete.php?id=<?= $composant->id_composant ?>">Supprimer</a>
-            <a class="modifier" href="update.php?id=<?= $composant->id_composant ?>">Modifier</a>
-          </div>
+    <div class="d-filter">
+      <div class="container">
+        <h2>Date filter</h2>
+
+        <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
+        <div class="custom-select" style="width:200px;">
+          <select name="filter1" id="filter1">
+            <option value="" disabled>Choisir votre etat</option>
+            <option value="disponible">Disponible</option>
+            <option value="en-pane">En pane</option>
+            <option value="perdu">Perdu</option>
+          </select>
         </div>
       </div>
-    <?php endforeach; ?>
-  </div>
-</section>
-<?php
-include "footer.php";
-?>
+    </div>
+    <div class="container">
+      <?php
+      if (!empty($message)) {
+        include "alert_success.php";
+      }
+      ?>
+    </div>
+    <!-- affichage du composants dans la page -->
+    <div class="container boxes">
+      <?php foreach ($composants as $composant) : ?>
+        <div class="box">
+          <div class="image">
+            <img src="./image/<?php echo $composant->image; ?>">
+          </div>
+          <div class="imformation">
+            <div class="nom">
+              <h3>Nom</h3>
+              <p><?= $composant->nom; ?></p>
+            </div>
+            <div class="quantite">
+              <h3>Quantite</h3>
+              <p><?= $composant->quantite; ?></p>
+            </div>
+            <div class="etat">
+              <h3>Etat</h3>
+              <p><?= $composant->etat; ?></p>
+            </div>
+            <div class="date">
+              <h3>Date d'achat</h3>
+              <p><?= $composant->date_achat; ?></p>
+            </div>
+            <div class="buttons">
+              <a class="supprimer" onclick="return confirm('Voulez vous vraiment supprimer ce composant ?')" href="delete.php?id=<?= $composant->id_composant ?>">Supprimer</a>
+              <a class="modifier" href="update.php?id=<?= $composant->id_composant ?>">Modifier</a>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  </section>
+  <?php
+  include "footer.php";
+  ?>
 
-<!-- <script>
+  <!-- <script>
   $(document).ready(function() {
     $("#filter").on("change", function() {
       var value = $(this).val();
@@ -103,5 +108,6 @@ include "footer.php";
   })
 </script> -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="script.js"></script>
+<?php } else header("Location: login.php"); ?>

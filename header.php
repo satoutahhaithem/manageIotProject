@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +14,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,300&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="style.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="css/all.min.css" />
   <link rel="stylesheet" href="css/normalize.css" />
   <!-- test -->
@@ -21,7 +25,7 @@
   <!-- Header -->
   <div class="header">
     <div class="container">
-      <img src="images/logo.png" alt="" class="logo" />
+      <a href="index.php"><img src="images/logo.png" alt="" class="logo" /></a>
       <div class="links">
         <ul>
           <li><a href="#" id="myBtn">Ajouter composant</a></li>
@@ -29,8 +33,13 @@
           <li><a href="filter_etat.php" id="myBtn2">Filter par etat</a></li>
           <li><a href="index.php">Composants</a></li>
           <li><a href="#">Compte</a></li>
-          <li><button>Logout</button></li>
+          <li><button onclick="logout()">Logout</button></li>
         </ul>
       </div>
     </div>
   </div>
+  <script>
+    function logout() {
+      window.location.href = 'logout.php';
+    }
+  </script>
