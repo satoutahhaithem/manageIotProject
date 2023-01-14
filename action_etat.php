@@ -17,7 +17,7 @@ if (isset($_POST['query1'])) {
       echo "
       <div class='box'>
       <div class='image'>
-        <img src='images/souris.jpg' alt='' />
+      <img src='./image/" . $row["image"] . "'/>
       </div>
       <div class='imformation'>
         <div class='nom'>

@@ -37,3 +37,8 @@ $(document).ready(function () {
   });
   // Set searched text in input field on click of search button
 });
+
+// Get first n elements
+
+// var composants = [];
+

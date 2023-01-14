@@ -22,6 +22,8 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
         <br />
         <form method="post" action="export.php" style="text-align:center;">
           <input type="submit" name="export" class="export" style="width: 100%;" value="Export Excel" />
+          <input type="button" id="next" value="Next">
+          <input type="button" id="previous" value="Previous">
         </form>
       </div>
     </div>
@@ -41,7 +43,7 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
     <!-- affichage du composants dans la page -->
     <div class="container boxes">
       <?php foreach ($composants as $composant) : ?>
-        <div class="box">
+        <div class="box" id="box">
           <div class="image">
             <img src="./image/<?php echo $composant->image; ?>">
           </div>
