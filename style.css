@@ -149,7 +149,7 @@ label.errors {
 .export .container {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-wrap: nowrap;
   flex-direction: row;
   padding: 0;
@@ -511,6 +511,9 @@ input[type="submit"]:hover {
 }
 /* Alert */
 
+.result p {
+  font-size: 20px;
+}
 .alert {
   opacity: 1;
   transition: opacity 0.6s; /* 600ms to fade out */
@@ -619,4 +622,42 @@ input[type="submit"]:hover {
 }
 .login .container form .login-btn:active {
   opacity: 0.5;
+}
+
+/* Previous and next buttons */
+#previous,
+#next {
+  background: var(--text-color);
+  border: 1px solid var(--text-color);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 400;
+  min-height: 40px;
+  outline: 0;
+  padding: 8px 10px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+#next:hover,
+#next:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: var(--text-color);
+}
+#previous:hover,
+#previous:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: var(--text-color);
 }

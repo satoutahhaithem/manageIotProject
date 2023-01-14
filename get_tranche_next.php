@@ -9,9 +9,9 @@ $statement_get->execute();
 $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
 $count = $statement_get->rowCount();
 
-echo "current:" . $currentcount;
-echo "</br>";
-echo "new" . $newcount;
+// echo "current:" . $currentcount;
+// echo "</br>";
+// echo "new" . $newcount;
 if ($count > 0) {
     foreach ($composants as $composant) : ?>
         <div class="box" id="box">

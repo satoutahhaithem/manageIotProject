@@ -8,9 +8,9 @@ $statement_get->execute();
 $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
 $count = $statement_get->rowCount();
 
-echo "current:" . $currentcount;
-echo "</br>";
-echo "new" . $newcount;
+// echo "current:" . $currentcount;
+// echo "</br>";
+// echo "new" . $newcount;
 if ($count > 0) {
     foreach ($composants as $composant) : ?>
         <div class="box" id="box">
@@ -42,8 +42,5 @@ if ($count > 0) {
         </div>
 <?php endforeach;
 } else
-    echo "<h1>No data remains</h1>";
-
-
-
+    echo "<h3>Aucune element est trouvee</h3>";
 ?>
