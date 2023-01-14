@@ -1,3 +1,29 @@
+<?php
+include "config/db_connection.php";
+// include "header.php";
+if (isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["promo"]) && isset($_POST["adress"]) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['whyWantProduct'])) {
+    $firstName = $_POST["firstName"];
+    $lastName = $_POST["lastName"];
+    $promo = $_POST["promo"];
+    $adress = $_POST["adress"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $whyWantProduct = $_POST["whyWantProduct"];
+
+    echo "hello1";
+    $sql_add = "INSERT INTO iot.reservation(firstName,lastName,promo,adress,email,phone,whyWantProduct) VALUES(:firstName,:lastName,:promo,:adress,:email,:phone,:whyWantProduct)";
+    $statement_add = $connection->prepare($sql_add);
+    echo "helo";
+    if ($statement_add->execute([':firstName' => $firstName, ':lastName' => $lastName, ':promo' => $promo, ':adress' => $adress, ':email' => $email, ':phone' => $phone, ':whyWantProduct' => $whyWantProduct])) {
+        $message = "data inserted successfuly";
+        echo $message;
+    } else {
+        echo "data doesn't inserted";
+    }
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,55 +33,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <form method="post">
         <!-- 2 column grid layout with text inputs for the first and last names -->
         <div class="row mb-4">
             <div class="col">
                 <div class="form-outline">
-                    <input type="text" id="firstName" class="form-control" />
+                    <input type="text" id="firstName" name="firstName" class="form-control" />
                     <label class="form-label" for="firstName">First name</label>
                 </div>
             </div>
             <div class="col">
                 <div class="form-outline">
-                    <input type="text" id="lastName" class="form-control" />
+                    <input type="text" id="lastName" name="lastName" class="form-control" />
                     <label class="form-label" for="lastName">Last name</label>
                 </div>
             </div>
         </div>
 
-        <!-- Text input -->
+
         <div class="form-outline mb-4">
-            <input type="text" id="promo" class="form-control" />
+            <input type="text" id="promo" name="promo" class="form-control" />
             <label class="form-label" for="promo">Promo</label>
         </div>
 
-        <!-- Text input -->
         <div class="form-outline mb-4">
-            <input type="text" id="adress" class="form-control" />
+            <input type="text" name="adress" id="adress" class="form-control" />
             <label class="form-label" for="adress">Address</label>
         </div>
 
-        <!-- Email input -->
         <div class="form-outline mb-4">
-            <input type="email" id="email" class="form-control" />
+            <input type="email" id="email" name="email" class="form-control" />
             <label class="form-label" for="email">Email</label>
         </div>
 
-        <!-- Number input -->
+
         <div class="form-outline mb-4">
-            <input type="number" id="phone" class="form-control" />
+            <input type="number" id="phone" name="phone" class="form-control" />
             <label class="form-label" for="phone">Phone</label>
         </div>
-
-        <!-- Message input -->
         <div class="form-outline mb-4">
-            <textarea class="form-control" id="whyWantProduct" rows="4"></textarea>
+            <textarea class="form-control" id="whyWantProduct" rows="4" name="whyWantProduct"></textarea>
             <label class="form-label" for="whyWantProduct">why do you want this product </label>
         </div>
         <!-- Submit button -->
-        <!-- <button type="submit" class="btn btn-primary btn-block mb-4">Place order</button> -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Place order</button>
     </form>
     <div>
         <p id="exportContent">
@@ -79,14 +102,14 @@
 <script src="jquery.wordexport.js"></script>
 <script>
     $('#btn').on('click', function() {
-        $('#exportContent').text('Hello, my name is ' + $('#firstName').val() + ' '
-         + $('#lastName').val() + ' '
-         + $('#promo').val() + ' '
-         + $('#adress').val() + ' '
-         + $('#email').val() + ' '
-         + $('#phone').val() + ' '
-         + $('#whyWantProduct').val() + ' '    
-         );
+        $('#exportContent').text('Hello, my name is ' + $('#firstName').val() + ' ' +
+            $('#lastName').val() + ' ' +
+            $('#promo').val() + ' ' +
+            $('#adress').val() + ' ' +
+            $('#email').val() + ' ' +
+            $('#phone').val() + ' ' +
+            $('#whyWantProduct').val() + ' '
+        );
     });
 
     function Export2Word(element, filename = '') {
