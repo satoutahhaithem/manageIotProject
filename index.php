@@ -29,12 +29,14 @@ include "header.php";
     </div>
     <div class="container">
       <?php
-      if (!empty($valideMessage)) {
-        include "alert_fail.php";
-      }
+
       if (!empty($message)) {
         include "alert_success.php";
       }
+      // if (!empty($valideMessage)) {
+      //   include "alert_fail.php";
+      // }
+
 
       ?>
 

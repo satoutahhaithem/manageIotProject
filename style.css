@@ -114,7 +114,7 @@ label.errors {
   font-size: 14px;
   font-weight: 600;
   color: var(--text-color);
-  opacity: 60%;
+  opacity: 80%;
   transition: all 0.2s ease-in-out 0s;
 }
 .header .container ul button {
@@ -154,15 +154,6 @@ label.errors {
   flex-direction: row;
   padding: 0;
 }
-.d-filter .container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  padding: 0;
-}
-
 @keyframes boxx {
   0% {
     opacity: 0%;
@@ -789,4 +780,29 @@ textarea {
   margin-top: 120px;
   text-align: left;
   margin-left: 30px;
+}
+
+#btn-search {
+  width: 100px;
+  background-color: var(--dark-purple);
+  color: var(--background-color);
+  font-size: 16px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#btn-search:hover {
+  color: var(--cultured);
+  background-color: var(--background-color);
+  border-color: var(--dark-purple);
+  color: var(--dark-purple);
+}
+
+.d-filter .container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  padding: 0;
 }

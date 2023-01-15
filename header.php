@@ -28,9 +28,8 @@ session_start();
       <a href="index.php"><img src="images/logo.png" alt="" class="logo" /></a>
       <div class="links">
         <ul>
-          <li><a href="#" id="myBtn">Ajouter composant</a></li>
-          <li><a href="filter_date.php" id="myBtn">Filter par date</a></li>
-          <li><a href="filter_etat.php" id="myBtn2">Filter par etat</a></li>
+          <li><a href="#" id="myBtn">Ajouter composant +</a></li>
+          <li><a href="filter_all.php" id="myBtn">Filtre</a></li>
           <li><a href="index.php">Composants</a></li>
           <li><a href="decharge.php">Decharge</a></li>
           <li><button onclick="logout()">Logout</button></li>

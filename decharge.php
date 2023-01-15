@@ -37,6 +37,10 @@ $statement_get->execute();
 $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
 ?>
 <section class="content">
+  <?php
+  include "add.php";
+
+  ?>
   <!-- modal that contains add form -->
   <div class="update decharge">
     <div class="container">

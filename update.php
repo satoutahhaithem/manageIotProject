@@ -56,7 +56,7 @@ if (isset($_POST['upload'])) {
       <h3>Mise a jour d'un element </h3>
       <div>
         <!-- form reel -->
-        <form method="post" enctype="multipart/form-data" id="myform">
+        <form method="post" enctype="multipart/form-data" id="myform" name="foo">
           <label for="name">Nom de Composant</label>
           <input type="text" id="name" name="name" value="<?php echo $composant->nom ?>" placeholder="Entrer le nom du composant, ex:souris .." />
 
@@ -70,7 +70,7 @@ if (isset($_POST['upload'])) {
           <div class="imgg">
             <label for="inputTag">
               Select Image <br />
-              <input id="inputTag" type="file" name="uploadfile" />
+              <input id="inputTag" type="file" name="uploadfile" value="C:/xampp/htdocs/project2023/image/attest.PNG" />
               <br />
               <span id="imageName"></span>
             </label>
