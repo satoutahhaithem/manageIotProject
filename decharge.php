@@ -1,7 +1,8 @@
 <?php
 include "config/db_connection.php";
 include "header.php";
-if (isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["promo"]) && isset($_POST["adress"]) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['whyWantProduct']) && isset($_POST['composant'])) {
+if (isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["promo"]) && isset($_POST["adress"]) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['whyWantProduct']) && isset($_POST["subPorduct"])) {
+
   $firstName = $_POST["firstName"];
   $lastName = $_POST["lastName"];
   $promo = $_POST["promo"];
@@ -9,13 +10,20 @@ if (isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["pro
   $email = $_POST["email"];
   $phone = $_POST["phone"];
   $whyWantProduct = $_POST["whyWantProduct"];
-  $composant = $_POST["composant"];
+  $composant = $_POST['prod'];
+  $cmp = "";
+  foreach ($composant as $cmp1) {
+    echo $cmp1;
+    $cmp .= $cmp1 . ",";
+  }
+  // $composant = $_POST["composant"];
   echo "hello1";
   $sql_add = "INSERT INTO iot.reservation(firstName,lastName,promo,adress,email,phone,whyWantProduct,composant) VALUES(:firstName,:lastName,:promo,:adress,:email,:phone,:whyWantProduct,:composant)";
   $statement_add = $connection->prepare($sql_add);
   echo "helo";
-  if ($statement_add->execute([':firstName' => $firstName, ':lastName' => $lastName, ':promo' => $promo, ':adress' => $adress, ':email' => $email, ':phone' => $phone, ':whyWantProduct' => $whyWantProduct, ':composant' => $composant])) {
+  if ($statement_add->execute([':firstName' => $firstName, ':lastName' => $lastName, ':promo' => $promo, ':adress' => $adress, ':email' => $email, ':phone' => $phone, ':whyWantProduct' => $whyWantProduct, ':composant' => $cmp])) {
     $message = "data inserted successfuly";
+    echo $message;
     $_SESSION['firstName'] = $firstName;
     $_SESSION['lastName'] = $lastName;
     $_SESSION['promo'] = $promo;
@@ -23,12 +31,42 @@ if (isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["pro
     $_SESSION['email'] = $email;
     $_SESSION['phone'] = $phone;
     $_SESSION['whyWantProduct'] = $whyWantProduct;
-    $_SESSION['composant'] = $composant;
+    $_SESSION['composant'] = $cmp;
     header("Location:rapport.php");
   } else {
     echo "data doesn't inserted";
   }
 }
+
+
+
+// if (isset($_POST["subPorduct"])) {
+//   $composant = $_POST['prod'];
+//   $cmp = "";
+//   foreach ($composant as $cmp1) {
+//     echo $cmp1;
+//     $cmp .= $cmp1 . ",";
+//   }
+//   $sql_addCmp = "INSERT INTO iot.reservation(composant) VALUES(:composant)";
+//   $statement_addCmp = $connection->prepare($sql_addCmp);
+//   if ($statement_addCmp->execute([':composant' => $cmp])) {
+//     $message = "composant inserted successfuly";
+//     echo $message;
+//     $_SESSION['firstName'] = $firstName;
+//     $_SESSION['lastName'] = $lastName;
+//     $_SESSION['promo'] = $promo;
+//     $_SESSION['adress'] = $adress;
+//     $_SESSION['email'] = $email;
+//     $_SESSION['phone'] = $phone;
+//     $_SESSION['whyWantProduct'] = $whyWantProduct;
+//     $_SESSION['composant'] = $cmp;
+//     header("Location:rapport.php");
+//   } else {
+//     $message = "composant doesnt inserted successfuly";
+//     echo $message;
+//   }
+// }
+
 
 // Get all composants
 $sql_get_all = "SELECT nom FROM iot.composant";
@@ -65,14 +103,34 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
           <input type="email" id="email" name="email" class="form-control" />
 
           <label for="composant">Choisir le composant</label>
-          <select name="composant" id="composant">
+          <!-- <select name="composant" id="composant">
             <option value="" disabled>Choisir votre etat</option>
             <?php foreach ($composants as $composant) : ?>
               <option value=<?= $composant->nom; ?>>
                 <?= $composant->nom; ?>
               </option>
             <?php endforeach; ?>
-          </select>
+          </select> -->
+
+          <!-- <form method="post"> -->
+          <div class="multiselect">
+            <div class="selectBox" onclick="showCheckboxes()">
+              <select>
+                <option>Choisir un composant</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div id="checkboxes">
+              <?php foreach ($composants as $composant) : ?>
+                <label for=<?= $composant->nom; ?>>
+                  <input type="checkbox" id=<?= $composant->nom; ?> name="prod[]" value=<?= $composant->nom; ?> />
+                  <?= $composant->nom; ?>
+                </label>
+              <?php endforeach; ?>
+            </div>
+          </div>
+
+          <!-- </form> -->
 
           <label class="form-label" for="phone">Phone</label>
           <input type="number" id="phone" name="phone" class="form-control" />
@@ -80,8 +138,8 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
           <label for="whyWantProduct">Motif de reservation</label>
           <textarea id="whyWantProduct" rows="4" name="whyWantProduct"></textarea>
 
-
-          <input type="submit" value="Reserver">
+          <input type="submit" value="ajouter composant" name="subPorduct">
+          <!-- <input type="submit" value="Reserver"> -->
 
         </form>
 
@@ -91,7 +149,9 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
   <script>
     let input = document.getElementById("inputTag");
     let imageName = document.getElementById("imageName")
-
+    $(document).ready(function() {
+      $('#ingredients').multiselect();
+    });
     input.addEventListener("change", () => {
       let inputImage = document.querySelector("input[type=file]").files[0];
 
@@ -147,6 +207,18 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
       }
 
       document.body.removeChild(downloadLink);
+    }
+    var expanded = false;
+
+    function showCheckboxes() {
+      var checkboxes = document.getElementById("checkboxes");
+      if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+      } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+      }
     }
   </script>
 </section>

@@ -37,11 +37,3 @@ $(document).ready(function () {
   });
   // Set searched text in input field on click of search button
 });
-<<<<<<< HEAD
-=======
-
-// Get first n elements
-
-// var composants = [];
-
->>>>>>> 20f3bca596211154078c13231222d34652f1784d

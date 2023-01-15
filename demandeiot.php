@@ -88,11 +88,24 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
         <select name="composant" id="composant">
             <option value="" disabled>Choisir votre etat</option>
             <?php foreach ($composants as $composant) : ?>
+
                 <option value=<?= $composant->nom; ?>>
-                    <?= $composant->nom; ?>
+                    <input type="checkbox"> <?= $composant->nom; ?> </input>
                 </option>
             <?php endforeach; ?>
         </select>
+        <div id="list1" class="dropdown-check-list" tabindex="100">
+            <span class="anchor">Select Fruits</span>
+            <ul class="items">
+                <li><input type="checkbox" />Apple </li>
+                <li><input type="checkbox" />Orange</li>
+                <li><input type="checkbox" />Grapes </li>
+                <li><input type="checkbox" />Berry </li>
+                <li><input type="checkbox" />Mango </li>
+                <li><input type="checkbox" />Banana </li>
+                <li><input type="checkbox" />Tomato</li>
+            </ul>
+        </div>
 
         <div class="form-outline mb-4">
             <input type="number" id="phone" name="phone" class="form-control" />
