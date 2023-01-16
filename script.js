@@ -2,6 +2,7 @@ $(document).ready(function () {
   // Send Search Text to the server
   $("#btn-search").on("click", function () {
     let searchText = $("#filter").val();
+    console.log(seachText);
     let searchText1 = $("#filter1").val();
     if (searchText != "" || searchText1 != "") {
       $.ajax({

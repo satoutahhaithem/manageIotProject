@@ -61,7 +61,7 @@ if (isset($_POST['upload'])) {
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2>Modal Header</h2>
+                <h2>Ajouter un composant IOT</h2>
             </div>
             <div class="modal-body">
                 <form action="index.php" method="post" enctype="multipart/form-data" id="myform">
@@ -94,7 +94,7 @@ if (isset($_POST['upload'])) {
                 </form>
             </div>
             <div class="modal-footer">
-                <h3>Modal Footer</h3>
+                <h3>Ajouter un composant IOT</h3>
             </div>
         </div>
     </div>

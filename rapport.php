@@ -20,15 +20,31 @@ session_start();
             </div>
             <div class="message">
                 <p>
-                    Je soussigné(e) nom et prenom que je vais emprunter le composant :
-                    "<?php echo $_SESSION['composant'] ?>" a pour but de <span> <?php echo $_SESSION['whyWantProduct'] ?>.</span>
+                    Je soussigné(e) <?php echo $_SESSION['lastName'] ?> et <?php echo $_SESSION['firstName'] ?> que je vais emprunter le composant dans le table ci dessous
+                    a pour but de <span> <?php echo $_SESSION['whyWantProduct'] ?>.</span>
                 </p>
+
+                <table style="width:80%" id="rap">
+
+                    <tr>
+                        <td>Nom</td>
+                        <td>Composants</td>
+                    </tr>
+
+
+                    <tr>
+                        <td><?php echo $_SESSION['lastName'] ?>-<?php echo $_SESSION['firstName'] ?></td>
+                        <td><?php echo $_SESSION['composant'] ?></td>
+                    </tr>
+
+                </table>
             </div>
         </div>
     </div>
 </div>
 <button onclick="Export2Word('exportContent');" id="btnAfficher">Export as .doc</button>
 <script>
+    window.jsPDF = window.jspdf.jsPDF;
     $('#btn').on('click', function() {
         $('#exportContent').text('Hello, my name is ' + $('#firstName').val() + ' ' +
             $('#lastName').val() + ' ' +
@@ -76,6 +92,10 @@ session_start();
 
         document.body.removeChild(downloadLink);
     }
+
+
+
+    // html to jsPDF
 </script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

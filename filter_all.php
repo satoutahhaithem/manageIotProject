@@ -30,6 +30,9 @@ $composants = $statement_get->fetchAll(PDO::FETCH_OBJ);
     ?>
     <div class="d-filter">
       <div class="container">
+        <form method="post" action="export_filtre.php" style="text-align:center;">
+          <input type="submit" name="export" class="export" style="width: 100%;" value="Export Excel" />
+        </form>
         <h2>Date filter</h2>
         <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
         <!-- <div class="custom-select" style="width:200px;">

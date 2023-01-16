@@ -426,18 +426,19 @@ label.errors {
 
 .modal-header {
   padding: 2px 16px;
-  background-color: #5cb85c;
+  background-color: var(--dark-purple);
   color: white;
   border-radius: 8px 8px 0 0;
 }
 
 .modal-body {
   padding: 2px 16px;
+  opacity: 80%;
 }
 
 .modal-footer {
   padding: 2px 16px;
-  background-color: #5cb85c;
+  background-color: var(--dark-purple);
   color: white;
   border-radius: 0 0 8px 8px;
 }
@@ -782,7 +783,8 @@ textarea {
   margin-left: 30px;
 }
 
-#btn-search {
+#btn-search,
+#btnAfficher {
   width: 100px;
   background-color: var(--dark-purple);
   color: var(--background-color);
@@ -791,7 +793,8 @@ textarea {
   border-radius: 8px;
   cursor: pointer;
 }
-#btn-search:hover {
+#btn-search:hover,
+#btnAfficher:hover {
   color: var(--cultured);
   background-color: var(--background-color);
   border-color: var(--dark-purple);
@@ -805,4 +808,61 @@ textarea {
   flex-wrap: nowrap;
   flex-direction: row;
   padding: 0;
+}
+
+/* checkbox */
+.multiselect {
+  width: 200px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+}
+
+#checkboxes label {
+  display: block;
+}
+
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
+
+/* Table de rapport */
+
+#rap table,
+#rap th,
+#rap td {
+  border: 1px solid black;
+}
+
+table {
+  background: #ccc;
+  border-spacing: 1px;
+}
+td {
+  background: #fff;
+  padding: 5px;
+}
+
+#btnAfficher {
+  margin: 0 auto;
+  width: 200px;
 }
